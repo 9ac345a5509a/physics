@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Inverted Pendulum Explanation</title>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body {
+                font-size: 16px;
+                color: #333;
+                margin: 40px auto;
+                max-width: 700px;
+                line-height: 1.6;
+                padding: 0 10px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Physics Explanation</h1>
+
+        <h2>Equation of Motion</h2>
+        <p>We define the following variables:</p>
+        <ul>
+            <li>\( t \): the time.</li>
+            <li>\( \omega \): the frequency that the support oscillates at.</li>
+            <li>\( A \): the amplitude that the support oscillates with.</li>
+            <li>\( y = A\cos (\omega t) \): the distance of the support from its initial position.</li>
+            <li>\( \ell \): the length of the pendulum.</li>
+            <li>\( \theta(t) \): the angle the pendulum makes with the vertical.</li>
+        </ul>
+
+        <p>Let's proceed using Newton's Laws, although Lagrangian Mechanics works equally well here. Consider the frame of reference of somebody on the support of the pendulum. The vertical acceleration here is \( \ddot{y} = - \omega^2 \cos (\omega t)\), so this person feels a downward acceleration of \( g - \omega^2 \cos (\omega t) \). The tangential acceleration is that times \( \sin \theta \), so: 
+        \[ \ell \ddot{\theta} = (g - \omega^2 \cos (\omega t))\sin \theta .\]</p>
+
+        <p>We can then approximately solve this differential equation.</p>
+        
+        <h2>But why does it stay up?</h2>
+        
+        <p></p>
+
+        <h2>Further Reading</h2>
+        <p>See "On the dynamic stabilization of an inverted pendulum" by Butikov (2001) for a detailed discussion.</p>
+
+        <h1>Technology</h1>
+        
+        <p>Made with <code>numeric.js</code>, MathJax and the &lt;canvas&gt; tag. Source code is available on GitHub.</p>
+        </div>
+    </body>
+</html>
