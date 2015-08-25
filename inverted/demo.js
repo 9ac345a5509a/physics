@@ -102,13 +102,13 @@ var g = 9.81;
 var solution;
 
 function init(freq, amplitude, length, disp, velo, tmax, ms) {
-    omega = freq;
-    amp = amplitude;
-    ell = length;
-    r0 = disp;
-    v0 = velo;
-    tjmax = tmax;
-    msInS = 1000/ms;
+    omega = parseFloat(freq);
+    amp = parseFloat(amplitude);
+    ell = parseFloat(length);
+    r0 = parseFloat(disp);
+    v0 = parseFloat(velo);
+    tjmax = parseFloat(tmax);
+    msInS = 1000/parseFloat(ms);
     solution = numeric.dopri(0, tjmax, [r0, v0],
     function(t, x) {
         return [x[1], (g - amp * omega * omega * Math.cos(omega * t))*Math.sin(x[0])/ell];
@@ -118,17 +118,40 @@ function init(freq, amplitude, length, disp, velo, tmax, ms) {
     });
     start = null;
 }
-init(50, 1, 5, 1, 0, 30, 0.1);
+
+if (!location.search) {
+    init(50,1,5,1,0,30,0.1);
+} else {
+    var args = location.search.substring(1).split(",");
+    var f = document.settings;
+    init.apply(this, args);
+    f.frequency.value = args[0];
+    f.amplitude.value = args[1];
+    f.length.value = args[2];
+    f.displacement.value = args[3];
+    f.velocity.value = args[4];
+    f.loop.value = args[5];
+    f.ms.value = args[6];
+    f.url.value = window.location.href;
+}
 
 function initForm(e) {
     var f = document.settings;
-    init(parseFloat(f.frequency.value),
-         parseFloat(f.amplitude.value),
-         parseFloat(f.length.value),
-         parseFloat(f.displacement.value),
-         parseFloat(f.velocity.value),
-         parseFloat(f.loop.value),
-         parseFloat(f.ms.value));
+    init(f.frequency.value,
+         f.amplitude.value,
+         f.length.value,
+         f.displacement.value,
+         f.velocity.value,
+         f.loop.value,
+         f.ms.value);
+    f.url.value = window.location.href.split("?")[0] + "?" +
+                                          [f.frequency.value,
+                                           f.amplitude.value,
+                                           f.length.value,
+                                           f.displacement.value,
+                                           f.velocity.value,
+                                           f.loop.value,
+                                           f.ms.value].join();
     return false;
 }
 
